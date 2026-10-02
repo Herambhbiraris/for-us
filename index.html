@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Our Time Together ❤️</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at top, #3a1024 0%, #140912 45%, #080408 100%);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: min(1000px, 92%);
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .heart {
+            font-size: 60px;
+            animation: heartbeat 1.5s infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            15% {
+                transform: scale(1.15);
+            }
+
+            30% {
+                transform: scale(1);
+            }
+
+            45% {
+                transform: scale(1.12);
+            }
+        }
+
+        h1 {
+            font-size: clamp(32px, 6vw, 64px);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            color: #d9b8c8;
+            font-size: 16px;
+            margin-bottom: 45px;
+        }
+
+        .counter {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .box {
+            padding: 28px 15px;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 20px;
+            background: rgba(255,255,255,0.055);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+        }
+
+        .number {
+            font-size: clamp(34px, 5vw, 60px);
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .label {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #cdaabd;
+        }
+
+        .since {
+            margin-top: 40px;
+            color: #c8a9ba;
+            font-size: 14px;
+        }
+
+        .live {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            margin-top: 18px;
+            color: #ff7bac;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ff4f91;
+            box-shadow: 0 0 12px #ff4f91;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            50% {
+                opacity: 0.35;
+            }
+        }
+
+        .footer {
+            margin-top: 45px;
+            font-size: 13px;
+            color: #806576;
+        }
+
+        @media (max-width: 650px) {
+            .counter {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .container {
+                padding: 35px 10px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .counter {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .box {
+                padding: 22px 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="container">
+
+        <div class="heart">❤️</div>
+
+        <h1>Our Time Together</h1>
+
+        <p class="subtitle">
+            Every second since we started.
+        </p>
+
+        <section class="counter">
+
+            <div class="box">
+                <div class="number" id="centuries">0</div>
+                <div class="label">Centuries</div>
+            </div>
+
+            <div class="box">
+                <div class="number" id="decades">0</div>
+                <div class="label">Decades</div>
+            </div>
+
+            <div class="box">
+                <div class="number" id="years">0</div>
+                <div class="label">Years</div>
+            </div>
+
+            <div class="box">
+                <div class="number" id="months">0</div>
+                <div class="label">Months</div>
+            </div>
+
+            <div class="box">
+                <div class="number" id="days">0</div>
+                <div class="label">Days</div>
+            </div>
+
+            <div class="box">
+                <div class="number" id="hours">0</div>
+                <div class="label">Hours</div>
+            </div>
+
+            <div class="box">
+                <div class="number" id="minutes">0</div>
+                <div class="label">Minutes</div>
+            </div>
+
+            <div class="box">
+                <div class="number" id="seconds">0</div>
+                <div class="label">Seconds</div>
+            </div>
+
+            <div class="box">
+                <div class="number" id="totalDays">0</div>
+                <div class="label">Total Days</div>
+            </div>
+
+        </section>
+
+        <div class="since">
+            Since <strong>31 January 2025 · 10:30 PM</strong>
+        </div>
+
+        <div class="live">
+            <span class="dot"></span>
+            LIVE COUNTER
+        </div>
+
+        <div class="footer">
+            And counting...
+        </div>
+
+    </main>
+
+
+    <script>
+
+        /*
+         * RELATIONSHIP START
+         * 31 January 2025
+         * 10:30 PM
+         * India Standard Time (UTC+05:30)
+         */
+
+        const startDate = new Date("2025-01-31T22:30:00+05:30");
+
+
+        function updateCounter() {
+
+            const now = new Date();
+
+            // If current time is before relationship start
+            if (now < startDate) {
+                return;
+            }
+
+
+            /*
+             * ------------------------------------------------
+             * CALENDAR DIFFERENCE
+             * ------------------------------------------------
+             */
+
+            let years = now.getFullYear() - startDate.getFullYear();
+
+            let months = now.getMonth() - startDate.getMonth();
+
+            let days = now.getDate() - startDate.getDate();
+
+            let hours = now.getHours() - startDate.getHours();
+
+            let minutes = now.getMinutes() - startDate.getMinutes();
+
+            let seconds = now.getSeconds() - startDate.getSeconds();
+
+
+            /*
+             * Borrow seconds
+             */
+
+            if (seconds < 0) {
+                seconds += 60;
+                minutes--;
+            }
+
+
+            /*
+             * Borrow minutes
+             */
+
+            if (minutes < 0) {
+                minutes += 60;
+                hours--;
+            }
+
+
+            /*
+             * Borrow hours
+             */
+
+            if (hours < 0) {
+                hours += 24;
+                days--;
+            }
+
+
+            /*
+             * Borrow days
+             *
+             * Get number of days in previous month.
+             */
+
+            if (days < 0) {
+
+                months--;
+
+                const previousMonth =
+                    new Date(
+                        now.getFullYear(),
+                        now.getMonth(),
+                        0
+                    ).getDate();
+
+                days += previousMonth;
+            }
+
+
+            /*
+             * Borrow months
+             */
+
+            if (months < 0) {
+                months += 12;
+                years--;
+            }
+
+
+            /*
+             * Convert years into centuries + decades + years
+             */
+
+            const centuries = Math.floor(years / 100);
+
+            const remainingAfterCenturies = years % 100;
+
+            const decades =
+                Math.floor(remainingAfterCenturies / 10);
+
+            const remainingYears =
+                remainingAfterCenturies % 10;
+
+
+            /*
+             * ------------------------------------------------
+             * TOTAL ELAPSED TIME
+             * ------------------------------------------------
+             */
+
+            const elapsedMilliseconds =
+                now.getTime() - startDate.getTime();
+
+            const totalSeconds =
+                Math.floor(elapsedMilliseconds / 1000);
+
+            const totalMinutes =
+                Math.floor(totalSeconds / 60);
+
+            const totalHours =
+                Math.floor(totalMinutes / 60);
+
+            const totalDays =
+                Math.floor(totalHours / 24);
+
+
+            /*
+             * ------------------------------------------------
+             * UPDATE HTML
+             * ------------------------------------------------
+             */
+
+            document.getElementById("centuries").textContent =
+                centuries;
+
+            document.getElementById("decades").textContent =
+                decades;
+
+            document.getElementById("years").textContent =
+                remainingYears;
+
+            document.getElementById("months").textContent =
+                months;
+
+            document.getElementById("days").textContent =
+                days;
+
+            document.getElementById("hours").textContent =
+                hours;
+
+            document.getElementById("minutes").textContent =
+                minutes;
+
+            document.getElementById("seconds").textContent =
+                seconds;
+
+            document.getElementById("totalDays").textContent =
+                totalDays.toLocaleString();
+        }
+
+
+        /*
+         * Run immediately
+         */
+
+        updateCounter();
+
+
+        /*
+         * Update every second.
+         *
+         * The calculation uses the actual current timestamp
+         * each time rather than simply incrementing a counter,
+         * so browser delays don't permanently throw the counter
+         * out of sync.
+         */
+
+        setInterval(updateCounter, 1000);
+
+    </script>
+
+</body>
+</html>
